@@ -31,6 +31,8 @@ public class plot extends Application {
         plotFrame.setConfigurationVisible(false);
         window.getContentPane().add(plotFrame, BorderLayout.CENTER);
         window.getContentPane().add(panel, BorderLayout.SOUTH);
+
+        
         window.pack();
         solve(9);
         window.setVisible(true);
