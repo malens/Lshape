@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="surfaceplotter-2.0.2">
+  <library name="commons-math3-3.6.1-javadoc">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/surfaceplotter-2.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-math3-3.6.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

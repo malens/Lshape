@@ -7,8 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="commons-math3-3.6" level="project" />
     <orderEntry type="library" name="surfaceplotter-2.0.2" level="project" />
     <orderEntry type="library" name="net.ericaro:surfaceplotter:2.0.1" level="project" />
+    <orderEntry type="library" name="commons-math3-3.6.1-javadoc" level="project" />
   </component>
 </module>
