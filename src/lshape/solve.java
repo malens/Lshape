@@ -7,8 +7,9 @@ import org.apache.commons.math3.linear.*;
  */
 public class solve {
 
+    private double eps = 0.00000001;
 
-    public static void solver(int n, ArraySurfaceModel output)
+    public void solver(int n, ArraySurfaceModel output)
     {
         RealVector vec = solveMatrix(n);
         float[][] v = new float[2 * n + 1][2 * n + 1];
@@ -30,12 +31,12 @@ public class solve {
     }
 
 
-    public static RealVector solveMatrix(int n){
+    public RealVector solveMatrix(int n){
         return new LUDecomposition(matrixA(n)).getSolver().solve(vectorB(n));
     }
 
 
-    private static Array2DRowRealMatrix matrixA (int n)
+    private Array2DRowRealMatrix matrixA (int n)
     {
         int size = (n+1) * (3 * n + 1);
         Array2DRowRealMatrix globalMatrix = new Array2DRowRealMatrix(size, size);
@@ -80,7 +81,7 @@ public class solve {
         return globalMatrix;
     }
 
-    private static void mapLocalToGlobal(Array2DRowRealMatrix m, int _1, int _2, int _3, int _4)
+    private void mapLocalToGlobal(Array2DRowRealMatrix m, int _1, int _2, int _3, int _4)
     {
         m.setEntry(_1, _1, m.getEntry(_1,_1)+localMatrix[0][0]);
         m.setEntry(_1, _2, m.getEntry(_1,_2)+localMatrix[0][1]);
@@ -100,15 +101,24 @@ public class solve {
         m.setEntry(_4, _4, m.getEntry(_4,_4)+localMatrix[3][3]);
     }
 
-    private static double g (double x, double y)
+    private double g1 (double x, double y)
     {
         double r = Math.sqrt(x * x + y * y);
-        double cos = Math.cos(Math.atan(y / x) - Math.PI / 4);
-        return Math.cbrt(r * r) * Math.cbrt(cos * cos);
+        double sin = Math.sin(Math.atan(y / x) + Math.PI / 2);
+        return Math.cbrt(r * r) * Math.cbrt(sin * sin);
+    }
+
+    private double g (double x, double y)
+    {
+        if (Math.abs(y-1)<eps) return x;
+        if (Math.abs(x+1)<eps) return -y;
+        if (Math.abs(x-1)<eps) return y;
+        if (Math.abs(y+1)<eps) return -x;
+        return 0;
     }
 
 
-    private static RealVector vectorB (int n)
+    private RealVector vectorB (int n)
     {
         int size = (n+1) * (3 * n + 1);
         RealVector vector = new ArrayRealVector(size);
@@ -142,7 +152,7 @@ public class solve {
     }
 
 
-    private static double localMatrix [][]={
+    private double localMatrix [][]={
             {2.0 / 3.0, -1.0 / 6.0, -1.0 / 3.0, -1.0 / 6.0},
             {-1.0 / 6.0, 2.0 / 3.0, -1.0 / 6.0, -1.0 / 3.0},
             {-1.0 / 3.0, -1.0 / 6.0, 2.0 / 3.0, -1.0 / 6.0},

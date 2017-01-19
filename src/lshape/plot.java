@@ -5,8 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static javafx.application.Application.launch;
+import java.util.function.Function;
 
 /**
  * Created by malens on 2017-01-18.
@@ -19,6 +18,13 @@ public class plot {
     private int n = 8;
     private Integer[] possibleDivisions;
     private JComboBox<Integer> divisionList;
+
+    /*(x, y) -> {
+        double r = Math.sqrt(x * x + y * y);
+        double sin = Math.sin(Math.atan(y / x) + Math.PI / 2);
+        return = Math.cbrt(r * r) * Math.cbrt(sin * sin);
+    }*/
+
 
 
 
@@ -70,7 +76,8 @@ public class plot {
 
     void solve(int n) {
         ArraySurfaceModel model = createModel();
-        solve.solver(n, model);
+        solve solution = new solve();
+        solution.solver(n, model);
         plotFrame.setModel(model);
         plotFrame.repaint();
 
